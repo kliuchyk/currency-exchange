@@ -1,25 +1,62 @@
-import React, { useEffect, useState } from 'react';
-import { getCurrenciesRates } from '../../api';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Row, Col, Table } from 'antd';
+
+import { getAllRates } from '../../store/currency/actions';
+import { selectAllRates, selectLoading } from '../../store/currency/selectors';
 
 export default function CurrenciesList() {
-  const [rates, setRates] = useState([]);
+  const dispatch = useDispatch();
+  const allRates = useSelector(selectAllRates);
+  const loading = useSelector(selectLoading);
 
   useEffect(() => {
-    const fetchRates = async () => {
-      const { base, rates } = await getCurrenciesRates();
-      console.log(base);
-      console.log(Array.isArray(rates));
-      setRates(rates);
-    };
-    fetchRates();
-  }, []);
+    dispatch(getAllRates());
+  }, [dispatch]);
+
+  const columns = [
+    {
+      title: 'Currency',
+      dataIndex: 'origin'
+    },
+    {
+      title: 'Rate',
+      dataIndex: 'rate'
+    }
+  ];
+
+  const ratesValues = Object.entries(allRates).map(
+    ([origin, rate], idx: number) => {
+      const rateNumValue = (rate as unknown) as number;
+
+      return {
+        key: idx,
+        origin,
+        rate: rateNumValue.toFixed(4)
+      };
+    }
+  );
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div>
       <h3>Currencies Rates</h3>
-      {Object.keys(rates).map((itemKey, idx) => (
-        <div key={idx}>{itemKey}</div>
-      ))}
+      <Row>
+        <Col span={4} offset={10}>
+          <Table
+            dataSource={ratesValues}
+            columns={columns}
+            pagination={{
+              total: ratesValues.length,
+              pageSize: ratesValues.length,
+              hideOnSinglePage: true
+            }}
+          />
+        </Col>
+      </Row>
     </div>
   );
 }
