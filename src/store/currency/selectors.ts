@@ -5,9 +5,14 @@ import { AppState } from './../configureStore';
 
 const selectCurrencies = (state: AppState) => state.currencies;
 
-export const selectAllRates = createSelector(
+export const selectById = createSelector(
   selectCurrencies,
-  (currency: CurrencyState) => currency.rates
+  (currency: CurrencyState) => currency.byId
+);
+
+export const selectAllIds = createSelector(
+  selectCurrencies,
+  (currency: CurrencyState) => currency.allIds
 );
 
 export const selectLoading = createSelector(

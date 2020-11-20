@@ -33,7 +33,7 @@ function App() {
                 <Link to="/currencies">
                   <Button type="primary">
                     <RightOutlined />
-                    Currencies
+                    Exchange Rates
                   </Button>
                 </Link>
               </Layout.Header>

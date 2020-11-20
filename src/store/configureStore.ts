@@ -8,7 +8,7 @@ import { CurrencyState } from './currency/reducer';
 
 export interface AppState {
   currencies: CurrencyState;
-};
+}
 
 export default function configureStore(initialState = {}) {
   const sagaMiddleware = createSagaMiddleware();
