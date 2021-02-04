@@ -1,0 +1,48 @@
+.ant-layout .ant-layout-header {
+  background: #41a386;
+  padding: 0 100px;
+  height: 120px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.link {
+  color: #f5f3f3;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.link:hover {
+  color: #fff;
+}
+
+.link.logo {
+  font-weight: 700;
+  font-size: 36px;
+}
+
+.nav-menu .link {
+  padding: 10px 20px;
+  transition: all .3s;
+}
+
+.nav-menu .link:hover {
+  background-color: red;
+  border-radius: 5px;
+  background: #357763;
+}
+
+
+
+
+.ant-layout-header .account-btn {
+  height: unset;
+  padding: 8px 25px;
+  color: #3f9e81;
+  font-weight: 400;
+  font-size: 16px;
+  border-radius: 6px;
+  margin-left: 10px;
+}

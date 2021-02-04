@@ -2,8 +2,8 @@ import React from 'react';
 import AppWrapper from './containers/AppWrapper';
 import { Route, Switch, Link } from 'react-router-dom';
 import { Button, Layout } from 'antd';
-import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
+import AppHeader from './components/AppHeader';
 import CurrencyConverter from './containers/CurrencyConverter';
 import CurrenciesList from './containers/CurrenciesList';
 import './App.css';
@@ -13,35 +13,18 @@ function App() {
     <AppWrapper>
       <div className="App">
         <Layout>
-          <Switch>
-            <Route exact path="/currencies">
-              <Layout.Header>
-                <Link to="/">
-                  <Button type="primary">
-                    <LeftOutlined />
-                    Back to Converter
-                  </Button>
-                </Link>
-              </Layout.Header>
-              <Layout.Content>
+          <AppHeader />
+          <Layout.Content>
+            <Switch>
+              <Route exact path="/currencies">
                 <CurrenciesList />
-              </Layout.Content>
-            </Route>
+              </Route>
 
-            <Route exact path="/">
-              <Layout.Header>
-                <Link to="/currencies">
-                  <Button type="primary">
-                    <RightOutlined />
-                    Exchange Rates
-                  </Button>
-                </Link>
-              </Layout.Header>
-              <Layout.Content>
+              <Route exact path="/">
                 <CurrencyConverter />
-              </Layout.Content>
-            </Route>
-          </Switch>
+              </Route>
+            </Switch>
+          </Layout.Content>
         </Layout>
       </div>
     </AppWrapper>
