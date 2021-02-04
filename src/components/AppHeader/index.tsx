@@ -17,17 +17,14 @@ const AppHeader = () => {
         <Link to="/" className="link">
           {TEXTS.LINKS.CONVERTER}
         </Link>
-
         <Link to="/currencies" className="link">
           {TEXTS.LINKS.RATES}
         </Link>
-
         <Link to="/contacts" className="link">
-        {TEXTS.LINKS.CONTACTS}
+          {TEXTS.LINKS.CONTACTS}
         </Link>
-
         <Link to="/create-account" className="">
-          <Button className="account-btn">Create account</Button>
+          <Button className="account-btn">{TEXTS.LINKS.CREATE_ACCOUNT}</Button>
         </Link>
       </nav>
     </Header>

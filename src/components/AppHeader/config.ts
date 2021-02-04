@@ -3,7 +3,8 @@ const TEXTS = {
     LOGO: 'money.wnc',
     CONVERTER: 'Converter',
     RATES: 'Exchange Rates',
-    CONTACTS: 'Contacts'
+    CONTACTS: 'Contacts',
+    CREATE_ACCOUNT: 'Create account'
   }
 };
 
