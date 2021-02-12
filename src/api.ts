@@ -6,3 +6,11 @@ export const getCurrenciesRates = async (base: string = 'USD') => {
   });
   return await response.json();
 };
+
+export const getRatesByCurrency = async (base: string, convertTo: string) => {
+  const response = await fetch(
+    `${BASE_API}/latest?base=${base}&symbols=${convertTo}`
+  );
+
+  return await response.json();
+};

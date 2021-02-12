@@ -7,8 +7,7 @@ import { getCurrenciesRates } from './../../../api';
 function* getRatesWorker() {
   try {
     const response = yield call(getCurrenciesRates);
-    const { rates } = response;
-    const modifiedRates = modifyRateValues(rates);
+    const modifiedRates = modifyRateValues(response.rates);
     yield put(setAllRates(modifiedRates));
   } catch (error) {
     console.log(error);

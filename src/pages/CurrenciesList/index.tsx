@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { StarFilled, StarOutlined } from '@ant-design/icons';
-
+import Spinner from '../../components/Spinner';
 import { toggleFavorite, getAllRates } from '../../store/currency/actions';
 import {
   selectLoading,
@@ -21,7 +21,7 @@ export default function CurrenciesList() {
   }, [dispatch]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   return (
@@ -37,7 +37,8 @@ export default function CurrenciesList() {
                 <p>{origin}</p>
                 <span>{rate}</span>
               </div>
-              <span className="star"
+              <span
+                className="star"
                 onClick={() =>
                   dispatch(toggleFavorite((origin as unknown) as string))
                 }
