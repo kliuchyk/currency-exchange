@@ -28,3 +28,19 @@
 .convert-btn.ant-btn-primary:focus {
   background: #464646;
 }
+
+.ant-form-item-control-input-content .input-number {
+  width: 100%;
+  outline: none;
+  border: solid #d9d9d9;
+  border-width: 0 0 2px;
+  -webkit-appearance: none;
+}
+
+.ant-form-item-control-input-content .input-number:hover {
+  border: none;
+}
+
+.ant-input-number-handler-wrap {
+  display: none;
+}

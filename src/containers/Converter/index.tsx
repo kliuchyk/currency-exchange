@@ -35,6 +35,7 @@ const Converter = () => {
               <Col span={16} style={{ paddingRight: '10px' }}>
                 <Form.Item label={TEXTS.FORM_LABELS.INPUT}>
                   <InputNumber
+                    bordered={false}
                     size="large"
                     placeholder="input placeholder"
                     type="number"
@@ -42,11 +43,7 @@ const Converter = () => {
                     onChange={(newValue) =>
                       setAmountToConvert(newValue as number)
                     }
-                    style={{
-                      width: '100%',
-                      outline: 'none',
-                      borderWidth: '0 0 2px'
-                    }}
+                    className="input-number"
                   />
                 </Form.Item>
               </Col>
@@ -74,6 +71,7 @@ const Converter = () => {
                     style={{
                       width: '100%',
                       outline: 'none',
+                      border: 'solid #d9d9d9',
                       borderWidth: '0 0 2px'
                     }}
                   />
