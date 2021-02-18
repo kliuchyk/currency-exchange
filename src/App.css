@@ -5,10 +5,11 @@ section.ant-layout {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  height: 100vh;
 }
 
 .ant-layout-content {
   background-color: #41a386;
   padding: 0 100px;
-  height: 100vh;
+  height: 100%;
 }
