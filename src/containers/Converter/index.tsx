@@ -1,14 +1,11 @@
 import React, { useCallback } from 'react';
-import { Form, InputNumber, Button, Select, Row, Col } from 'antd';
-// import { useDispatch } from 'react-redux';
+import { Form, InputNumber, Input, Button, Select, Row, Col } from 'antd';
 import { TEXTS } from './config';
 import useLogic from './useLogic';
 import './styles.css';
 
 const Converter = () => {
   const {
-    // byId,
-    // setConvertedResult,
     allIds,
     base,
     amountToConvert,
@@ -70,10 +67,10 @@ const Converter = () => {
             <Row>
               <Col span={16} style={{ paddingRight: '10px' }}>
                 <Form.Item label={TEXTS.FORM_LABELS.OUTPUT}>
-                  <InputNumber
+                  <Input
                     placeholder="input placeholder"
                     size="large"
-                    value={convertedResult}
+                    value={convertedResult as string}
                     style={{
                       width: '100%',
                       outline: 'none',

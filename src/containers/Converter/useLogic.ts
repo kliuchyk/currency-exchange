@@ -1,15 +1,13 @@
-import { useState, useMemo, useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useState, useMemo, useCallback, SyntheticEvent } from 'react';
+import { useSelector } from 'react-redux';
 import {
   selectById,
   selectAllIds,
   selectBase
 } from '../../store/currency/selectors';
-import { getRatesByCurrencyStart } from '../../store/currency/actions';
+import { getExchangeRate } from '../../api';
 
 const useLogic = () => {
-  const dispatch = useDispatch();
-
   const byId = useSelector(selectById);
 
   const allIds = useSelector(selectAllIds);
@@ -18,41 +16,58 @@ const useLogic = () => {
 
   const [amountToConvert, setAmountToConvert] = useState<number | undefined>();
 
-  const [convertedResult, setConvertedResult] = useState<number | undefined>();
+  const [convertedResult, setConvertedResult] = useState<string | null>(null);
 
   const [currencyConvertFrom, setCurrencyConvertFrom] = useState(base);
 
   const [currencyConvertTo, setCurrencyConvertTo] = useState(allIds[0]);
 
-  const convertMoney = useCallback(async () => {
-    console.log(currencyConvertFrom, currencyConvertTo, amountToConvert);
-    if (!amountToConvert) {
-      // show an error msg
-      return;
-    }
+  const [isError, setIsError] = useState(false);
 
-    if (base === currencyConvertFrom) {
-      const result = (amountToConvert as number) * byId[currencyConvertTo].rate;
-      setConvertedResult(result);
-      return;
-    }
+  const getExchangeResult = useCallback(
+    async (base: string, convertTo: string) => {
+      return await getExchangeRate({
+        base,
+        convertTo
+      });
+    },
+    []
+  );
 
-    dispatch(
-      getRatesByCurrencyStart({
-        base: currencyConvertFrom,
-        convertTo: currencyConvertTo
-      })
-    );
+  const convertMoney = useCallback(
+    async (e: SyntheticEvent) => {
+      e.preventDefault();
 
-    // const res = await
-  }, [
-    base,
-    currencyConvertFrom,
-    byId,
-    currencyConvertTo,
-    amountToConvert,
-    dispatch
-  ]);
+      if (!amountToConvert) {
+        setIsError(true);
+        return;
+      }
+
+      if (base === currencyConvertFrom) {
+        const result =
+          (amountToConvert as number) * byId[currencyConvertTo].rate;
+        setConvertedResult((result.toFixed(3) as unknown) as string);
+        return;
+      }
+
+      const { rates } = await getExchangeResult(
+        currencyConvertFrom,
+        currencyConvertTo
+      );
+
+      const result = rates ? amountToConvert * rates[currencyConvertTo] : null;
+
+      setConvertedResult(((result as number).toFixed(3) as unknown) as string);
+    },
+    [
+      base,
+      currencyConvertFrom,
+      byId,
+      currencyConvertTo,
+      amountToConvert,
+      getExchangeResult
+    ]
+  );
 
   return useMemo(
     () => ({
@@ -67,7 +82,8 @@ const useLogic = () => {
       setCurrencyConvertFrom,
       currencyConvertTo,
       setCurrencyConvertTo,
-      convertMoney
+      convertMoney,
+      isError
     }),
     [
       byId,
@@ -81,7 +97,8 @@ const useLogic = () => {
       setCurrencyConvertFrom,
       currencyConvertTo,
       setCurrencyConvertTo,
-      convertMoney
+      convertMoney,
+      isError
     ]
   );
 };

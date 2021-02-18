@@ -14,6 +14,8 @@ function* getRatesWorker() {
   }
 }
 
-export default function* currenciesRatesWatcher() {
+function* currenciesRatesSaga() {
   yield takeEvery(CURRENCIES_ACTIONS.GET_ALL_RATES, getRatesWorker);
 }
+
+export default currenciesRatesSaga;

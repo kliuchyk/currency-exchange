@@ -8,6 +8,7 @@ import { selectLoading } from '../../store/currency/selectors';
 
 export default function CurrencyConverter() {
   const dispatch = useDispatch();
+
   const loading = useSelector(selectLoading);
 
   useEffect(() => {
@@ -15,7 +16,7 @@ export default function CurrencyConverter() {
   }, [dispatch]);
 
   if (loading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   return (
